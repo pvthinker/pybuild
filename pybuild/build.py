@@ -9,7 +9,7 @@ import time
 import numpy as np
 import subprocess
 from ctypes import POINTER, c_char, c_double, c_float, c_int32, c_int8, byref, cdll, c_int, c_bool, c_wchar_p, create_string_buffer, c_char_p
-from mpi4py import MPI
+#from mpi4py import MPI
 #import mpi4py
 
 def bold(string):
@@ -156,19 +156,19 @@ def build(modules, path=None):
 
     assert path is not None, "path is required when calling build"
 
-#    MPI = mpi4py.MPI
+    #    MPI = mpi4py.MPI
 
-    if MPI.COMM_WORLD.Get_rank() == 0:
+    #    if MPI.COMM_WORLD.Get_rank() == 0:
 
-        compiler, flags = get_compiler()
+    compiler, flags = get_compiler()
 
-        for library, srcs in modules.items():
-            if srcs_newer_than_lib(srcs, library, path):
-                elapsed, command = compile_fortran(compiler, flags, srcs, library, path)
-                print(bold(f"{library:>20}: [compiled in {elapsed:4.2} s]"))
-                for line in command.split(";"):
-                    print(" "*4, line)
-            else:
-                print(bold(f"{library:>20}: [ok]"))
+    for library, srcs in modules.items():
+        if srcs_newer_than_lib(srcs, library, path):
+            elapsed, command = compile_fortran(compiler, flags, srcs, library, path)
+            print(bold(f"{library:>20}: [compiled in {elapsed:4.2} s]"))
+            for line in command.split(";"):
+                print(" "*4, line)
+        else:
+            print(bold(f"{library:>20}: [ok]"))
 
-    MPI.COMM_WORLD.Barrier()
+    #MPI.COMM_WORLD.Barrier()

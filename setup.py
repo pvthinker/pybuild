@@ -8,9 +8,7 @@ setup(
     author_email='roullet@univ-brest.fr',
     license='MIT License',
     packages=['pybuild'],
-    install_requires=['mpi4py>=2.0',
-                      'numpy',
-                      ],
+    install_requires=[],
 
     classifiers=[
         'Development Status :: 1 - Planning',
